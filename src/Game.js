@@ -1,19 +1,23 @@
 import { GameLayout } from './game-layout';
-import { useState, useEffect } from 'react';
-import store, { RESTART_GAME } from './store';
+//import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RESTART_GAME } from './store';
 
 export const Game = () => {
-  const [ state, setState ] = useState(store.getState());
+  // const [ state, setState ] = useState(store.getState());
 
-  useEffect(() => {
-    const subscribe = store.subscribe(() => {
-      setState(store.getState());
-    })
-    return () => subscribe();
-  }, []);
+  // useEffect(() => {
+  //   const subscribe = store.subscribe(() => {
+  //     setState(store.getState());
+  //   })
+  //   return () => subscribe();
+  // }, []);
   
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
+
   const handleRestart = () => {
-    store.dispatch({ type: RESTART_GAME });
+    dispatch({ type: RESTART_GAME });
   } 
 
   return (  
